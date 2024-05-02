@@ -1,0 +1,52 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:women_safety_app/controller/home_screen_controller.dart';
+import 'package:women_safety_app/utils/color_constants.dart';
+import 'package:women_safety_app/utils/women_quotes.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.read<HomeScreenController>().getRandomQuote();
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final homeScreenState = context.watch<HomeScreenController>();
+    return Scaffold(
+      appBar: AppBar(backgroundColor: ColorConstants.primaryPink),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Container(
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      color: ColorConstants.darkGreen,
+                      borderRadius: BorderRadius.circular(30)),
+                  child: Text(
+                    womenQuotes[homeScreenState.quoteIndex],
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: ColorConstants.primaryWhite),
+                  )),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

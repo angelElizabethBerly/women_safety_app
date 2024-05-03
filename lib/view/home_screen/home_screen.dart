@@ -27,6 +27,20 @@ class _HomeScreenState extends State<HomeScreen> {
     final homeScreenState = context.watch<HomeScreenController>();
     return Scaffold(
       appBar: AppBar(backgroundColor: ColorConstants.primaryPink),
+      drawer: Drawer(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            UserAccountsDrawerHeader(
+                currentAccountPicture: CircleAvatar(),
+                accountName: Text("Acc Name"),
+                accountEmail: Text("Acc Email")),
+            ListTile(leading: Icon(Icons.person), title: Text("Profile")),
+            ListTile(leading: Icon(Icons.settings), title: Text("Settings")),
+            ListTile(leading: Icon(Icons.book), title: Text("About")),
+          ],
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -36,12 +50,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      color: ColorConstants.darkGreen,
+                      color: ColorConstants.primaryGreen,
                       borderRadius: BorderRadius.circular(30)),
                   child: Text(
                     womenQuotes[homeScreenState.quoteIndex],
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: ColorConstants.primaryWhite),
+                    style: TextStyle(
+                        color: ColorConstants.primaryWhite, fontSize: 16),
                   )),
             ],
           ),

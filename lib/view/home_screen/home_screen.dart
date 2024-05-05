@@ -3,8 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:women_safety_app/controller/home_screen_controller.dart';
+import 'package:women_safety_app/view/home_screen/widgets/custom_carousel.dart';
 import 'package:women_safety_app/utils/color_constants.dart';
-import 'package:women_safety_app/utils/women_quotes.dart';
+import 'package:women_safety_app/utils/women_database.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -50,14 +51,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      color: ColorConstants.primaryGreen,
+                      color: ColorConstants.primaryPink,
                       borderRadius: BorderRadius.circular(30)),
                   child: Text(
-                    womenQuotes[homeScreenState.quoteIndex],
+                    WomenDatabase.womenQuotes[homeScreenState.quoteIndex],
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: ColorConstants.primaryWhite, fontSize: 16),
                   )),
+              CustomCarousalWidget()
             ],
           ),
         ),

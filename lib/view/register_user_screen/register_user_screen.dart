@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:women_safety_app/utils/color_constants.dart';
 import 'package:women_safety_app/view/home_screen/home_screen.dart';
 import 'package:women_safety_app/view/login_screen/login_screen.dart';
-import 'package:women_safety_app/view/register_option_screen/register_option_screen.dart';
 
 class RegisterUserScreen extends StatefulWidget {
   const RegisterUserScreen({super.key});

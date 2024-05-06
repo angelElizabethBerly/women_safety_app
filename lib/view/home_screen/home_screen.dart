@@ -6,6 +6,8 @@ import 'package:women_safety_app/controller/home_screen_controller.dart';
 import 'package:women_safety_app/view/home_screen/widgets/custom_carousel.dart';
 import 'package:women_safety_app/utils/color_constants.dart';
 import 'package:women_safety_app/utils/women_database.dart';
+import 'package:women_safety_app/view/home_screen/widgets/emergency_widgets/ambulance_emergency.dart';
+import 'package:women_safety_app/view/home_screen/widgets/emergency_widgets/contact_emergency.dart';
 import 'package:women_safety_app/view/home_screen/widgets/emergency_widgets/police_emergency.dart';
 import 'package:women_safety_app/view/home_screen/widgets/emergency_widgets/sos_emergency.dart';
 
@@ -61,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: TextStyle(
                         color: ColorConstants.primaryWhite, fontSize: 16),
                   )),
-              SizedBox(height: 20),
+              SizedBox(height: 10),
               Expanded(
                 child: GridView(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -71,8 +73,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     SosEmergencyWidget(),
                     PoliceEmergencyWidget(),
-                    Container(color: ColorConstants.primaryGreen),
-                    Container(color: ColorConstants.primaryBlue)
+                    AmbulanceEmergencyWidget(),
+                    EmergencyContactWidget()
                   ],
                 ),
               ),

@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:women_safety_app/utils/color_constants.dart';
 
-class SosEmergencyWidget extends StatelessWidget {
-  const SosEmergencyWidget({super.key});
+class EmergencyContactWidget extends StatelessWidget {
+  const EmergencyContactWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +12,8 @@ class SosEmergencyWidget extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
       decoration: BoxDecoration(
           gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
+              begin: Alignment.bottomRight,
+              end: Alignment.topLeft,
               colors: [
             ColorConstants.primaryBlue,
             ColorConstants.primaryPink
@@ -21,9 +21,11 @@ class SosEmergencyWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.sos, size: 80, color: ColorConstants.primaryWhite),
+          Icon(Icons.contact_emergency,
+              size: 80, color: ColorConstants.primaryWhite),
+          SizedBox(height: 10),
           Text(
-            "Send an SOS Signal",
+            "Call Emergency Contact",
             textAlign: TextAlign.center,
             style: TextStyle(
                 color: ColorConstants.primaryWhite,

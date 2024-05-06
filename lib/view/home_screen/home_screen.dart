@@ -6,6 +6,8 @@ import 'package:women_safety_app/controller/home_screen_controller.dart';
 import 'package:women_safety_app/view/home_screen/widgets/custom_carousel.dart';
 import 'package:women_safety_app/utils/color_constants.dart';
 import 'package:women_safety_app/utils/women_database.dart';
+import 'package:women_safety_app/view/home_screen/widgets/emergency_widgets/police_emergency.dart';
+import 'package:women_safety_app/view/home_screen/widgets/emergency_widgets/sos_emergency.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -59,6 +61,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: TextStyle(
                         color: ColorConstants.primaryWhite, fontSize: 16),
                   )),
+              SizedBox(height: 20),
+              Expanded(
+                child: GridView(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisSpacing: 5,
+                      mainAxisSpacing: 5,
+                      crossAxisCount: 2),
+                  children: [
+                    SosEmergencyWidget(),
+                    PoliceEmergencyWidget(),
+                    Container(color: ColorConstants.primaryGreen),
+                    Container(color: ColorConstants.primaryBlue)
+                  ],
+                ),
+              ),
               CustomCarousalWidget()
             ],
           ),

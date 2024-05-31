@@ -16,42 +16,52 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorConstants.primaryPeach,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Center(
               child: Text(
             "Login",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+            style: TextStyle(
+                fontWeight: FontWeight.w200,
+                fontSize: 30,
+                color: ColorConstants.darkPink),
           )),
           SizedBox(height: 30),
           TextFormField(
             decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(width: 5),
-                  borderRadius: BorderRadius.circular(10)),
-              border: OutlineInputBorder(
-                  borderSide: BorderSide(width: 3),
-                  borderRadius: BorderRadius.circular(10)),
-              filled: true,
-              fillColor: ColorConstants.primaryWhite,
-              hintText: "Enter Username",
-            ),
+                enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(width: 2, color: ColorConstants.primaryPink),
+                    borderRadius: BorderRadius.circular(10)),
+                border: OutlineInputBorder(
+                    borderSide: BorderSide(width: 3),
+                    borderRadius: BorderRadius.circular(10)),
+                filled: true,
+                fillColor: ColorConstants.primaryWhite,
+                labelText: "Username",
+                labelStyle: TextStyle(
+                  color: ColorConstants.darkPink,
+                  fontWeight: FontWeight.w200,
+                )),
           ),
           SizedBox(height: 20),
           TextFormField(
             decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(width: 5),
-                  borderRadius: BorderRadius.circular(10)),
-              border: OutlineInputBorder(
-                  borderSide: BorderSide(width: 3),
-                  borderRadius: BorderRadius.circular(10)),
-              filled: true,
-              fillColor: ColorConstants.primaryWhite,
-              hintText: "Enter Password",
-            ),
+                enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(width: 2, color: ColorConstants.primaryPink),
+                    borderRadius: BorderRadius.circular(10)),
+                border: OutlineInputBorder(
+                    borderSide: BorderSide(width: 3),
+                    borderRadius: BorderRadius.circular(10)),
+                filled: true,
+                fillColor: ColorConstants.primaryWhite,
+                labelText: "Password",
+                labelStyle: TextStyle(
+                  color: ColorConstants.darkPink,
+                  fontWeight: FontWeight.w200,
+                )),
             obscureText: true,
           ),
           SizedBox(height: 20),
@@ -62,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
               },
               style: ButtonStyle(
                   backgroundColor:
-                      MaterialStatePropertyAll(ColorConstants.primaryBlack)),
+                      WidgetStatePropertyAll(ColorConstants.darkPink)),
               child: Text("Login",
                   style: TextStyle(color: ColorConstants.primaryWhite))),
         ]),
@@ -84,8 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
               },
               child: Text(
                 "Register",
-                style:
-                    TextStyle(fontSize: 15, color: ColorConstants.primaryBlack),
+                style: TextStyle(fontSize: 15, color: ColorConstants.darkPink),
               ))
         ],
       ),

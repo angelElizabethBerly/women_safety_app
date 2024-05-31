@@ -16,71 +16,69 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorConstants.primaryPeach,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Center(
               child: Text(
             "Register",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+            style: TextStyle(
+                fontWeight: FontWeight.w200,
+                fontSize: 30,
+                color: ColorConstants.darkPink),
           )),
           SizedBox(height: 30),
           TextFormField(
             decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(width: 5),
-                  borderRadius: BorderRadius.circular(10)),
-              border: OutlineInputBorder(
-                  borderSide: BorderSide(width: 3),
-                  borderRadius: BorderRadius.circular(10)),
-              filled: true,
-              fillColor: ColorConstants.primaryWhite,
-              hintText: "Enter Username",
-            ),
+                enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(width: 2, color: ColorConstants.primaryPink),
+                    borderRadius: BorderRadius.circular(10)),
+                border: OutlineInputBorder(
+                    borderSide: BorderSide(width: 3),
+                    borderRadius: BorderRadius.circular(10)),
+                hintText: "Enter Username",
+                hintStyle: TextStyle(fontWeight: FontWeight.w300)),
           ),
           SizedBox(height: 20),
           TextFormField(
             decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(width: 5),
-                  borderRadius: BorderRadius.circular(10)),
-              border: OutlineInputBorder(
-                  borderSide: BorderSide(width: 3),
-                  borderRadius: BorderRadius.circular(10)),
-              filled: true,
-              fillColor: ColorConstants.primaryWhite,
-              hintText: "Enter Password",
-            ),
+                enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(width: 2, color: ColorConstants.primaryPink),
+                    borderRadius: BorderRadius.circular(10)),
+                border: OutlineInputBorder(
+                    borderSide: BorderSide(width: 3),
+                    borderRadius: BorderRadius.circular(10)),
+                hintText: "Enter Password",
+                hintStyle: TextStyle(fontWeight: FontWeight.w300)),
             obscureText: true,
           ),
           SizedBox(height: 20),
           TextFormField(
             decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(width: 5),
-                  borderRadius: BorderRadius.circular(10)),
-              border: OutlineInputBorder(
-                  borderSide: BorderSide(width: 3),
-                  borderRadius: BorderRadius.circular(10)),
-              filled: true,
-              fillColor: ColorConstants.primaryWhite,
-              hintText: "Enter Your Name",
-            ),
+                enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(width: 2, color: ColorConstants.primaryPink),
+                    borderRadius: BorderRadius.circular(10)),
+                border: OutlineInputBorder(
+                    borderSide: BorderSide(width: 3),
+                    borderRadius: BorderRadius.circular(10)),
+                hintText: "Enter Your Name",
+                hintStyle: TextStyle(fontWeight: FontWeight.w300)),
           ),
           SizedBox(height: 20),
           TextFormField(
             decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(width: 5),
-                  borderRadius: BorderRadius.circular(10)),
-              border: OutlineInputBorder(
-                  borderSide: BorderSide(width: 3),
-                  borderRadius: BorderRadius.circular(10)),
-              filled: true,
-              fillColor: ColorConstants.primaryWhite,
-              hintText: "Enter Your Age",
-            ),
+                enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(width: 2, color: ColorConstants.primaryPink),
+                    borderRadius: BorderRadius.circular(10)),
+                border: OutlineInputBorder(
+                    borderSide: BorderSide(width: 3),
+                    borderRadius: BorderRadius.circular(10)),
+                hintText: "Enter Your Age",
+                hintStyle: TextStyle(fontWeight: FontWeight.w300)),
           ),
           SizedBox(height: 20),
           ElevatedButton(
@@ -90,7 +88,7 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
               },
               style: ButtonStyle(
                   backgroundColor:
-                      MaterialStatePropertyAll(ColorConstants.primaryBlack)),
+                      WidgetStatePropertyAll(ColorConstants.darkPink)),
               child: Text("Register",
                   style: TextStyle(color: ColorConstants.primaryWhite))),
         ]),

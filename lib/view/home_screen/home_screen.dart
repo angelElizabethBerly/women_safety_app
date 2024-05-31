@@ -10,6 +10,7 @@ import 'package:women_safety_app/view/home_screen/widgets/emergency_widgets/ambu
 import 'package:women_safety_app/view/home_screen/widgets/emergency_widgets/contact_emergency.dart';
 import 'package:women_safety_app/view/home_screen/widgets/emergency_widgets/police_emergency.dart';
 import 'package:women_safety_app/view/home_screen/widgets/emergency_widgets/sos_emergency.dart';
+import 'package:women_safety_app/view/home_screen/widgets/navigation_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -31,7 +32,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final homeScreenState = context.watch<HomeScreenController>();
     return Scaffold(
-      appBar: AppBar(backgroundColor: ColorConstants.primaryPink),
+      appBar: AppBar(
+        backgroundColor: ColorConstants.primaryPink,
+        elevation: 2,
+        shadowColor: ColorConstants.darkPink,
+        title: Text(
+          "SafeWomen",
+          style: TextStyle(color: ColorConstants.primaryWhite),
+        ),
+      ),
       drawer: Drawer(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,26 +58,33 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Container(
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      color: ColorConstants.primaryPink,
-                      borderRadius: BorderRadius.circular(30)),
-                  child: Text(
-                    WomenDatabase.womenQuotes[homeScreenState.quoteIndex],
-                    textAlign: TextAlign.center,
+          child: SingleChildScrollView(
+            physics: AlwaysScrollableScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 10),
+                Text(
+                  WomenDatabase.womenQuotes[homeScreenState.quoteIndex],
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
+                ),
+                SizedBox(height: 10),
+                Divider(color: ColorConstants.darkPink),
+                Text("EMERGENCY",
                     style: TextStyle(
-                        color: ColorConstants.primaryWhite, fontSize: 16),
-                  )),
-              SizedBox(height: 10),
-              Expanded(
-                child: GridView(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 25,
+                        color: ColorConstants.darkPink)),
+                Divider(color: ColorConstants.darkPink),
+                SizedBox(height: 10),
+                GridView(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisSpacing: 5,
-                      mainAxisSpacing: 5,
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 20,
                       crossAxisCount: 2),
                   children: [
                     SosEmergencyWidget(),
@@ -77,9 +93,24 @@ class _HomeScreenState extends State<HomeScreen> {
                     EmergencyContactWidget()
                   ],
                 ),
-              ),
-              CustomCarousalWidget()
-            ],
+                SizedBox(height: 20),
+                Divider(color: ColorConstants.darkPink),
+                Text("NAVIGATION",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 25,
+                        color: ColorConstants.darkPink)),
+                Divider(color: ColorConstants.darkPink),
+                SizedBox(height: 5),
+                NavigationWidget(),
+                SizedBox(height: 20),
+                Text("ARTICLES",
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
+                SizedBox(height: 5),
+                CustomCarousalWidget()
+              ],
+            ),
           ),
         ),
       ),

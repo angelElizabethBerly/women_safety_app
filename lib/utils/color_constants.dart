@@ -6,6 +6,8 @@ class ColorConstants {
   static const Color primaryGreen = Color(0xff70B77E);
   static const Color primaryPeach = Color(0xffE0A890);
   static const Color primaryPink = Color(0xffCE1483);
+  static const Color darkPink = Color(0xff904C77);
+
   static const Color primaryWhite = Colors.white;
   static const Color primaryBlack = Colors.black;
 }

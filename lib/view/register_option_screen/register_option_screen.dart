@@ -16,14 +16,16 @@ class _RegisterOptionScreenState extends State<RegisterOptionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorConstants.primaryPeach,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Center(
               child: Text(
             "Choose Your Role",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+            style: TextStyle(
+                fontWeight: FontWeight.w200,
+                fontSize: 30,
+                color: ColorConstants.darkPink),
           )),
           SizedBox(height: 30),
           InkWell(
@@ -39,11 +41,12 @@ class _RegisterOptionScreenState extends State<RegisterOptionScreen> {
                 decoration: BoxDecoration(
                     color: ColorConstants.primaryWhite,
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(width: 5)),
+                    border: Border.all(
+                        width: 2, color: ColorConstants.primaryPink)),
                 child: Center(
                   child: Text(
                     "User",
-                    style: TextStyle(fontSize: 25),
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.w300),
                   ),
                 )),
           ),
@@ -54,11 +57,12 @@ class _RegisterOptionScreenState extends State<RegisterOptionScreen> {
               decoration: BoxDecoration(
                   color: ColorConstants.primaryWhite,
                   borderRadius: BorderRadius.circular(15),
-                  border: Border.all(width: 5)),
+                  border:
+                      Border.all(width: 2, color: ColorConstants.primaryPink)),
               child: Center(
                 child: Text(
                   "Admin",
-                  style: TextStyle(fontSize: 25),
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w300),
                 ),
               )),
           SizedBox(height: 40),
@@ -76,8 +80,8 @@ class _RegisterOptionScreenState extends State<RegisterOptionScreen> {
                   },
                   child: Text(
                     "Log in",
-                    style: TextStyle(
-                        fontSize: 15, color: ColorConstants.primaryBlack),
+                    style:
+                        TextStyle(fontSize: 15, color: ColorConstants.darkPink),
                   ))
             ],
           )

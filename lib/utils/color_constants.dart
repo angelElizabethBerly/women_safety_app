@@ -10,4 +10,5 @@ class ColorConstants {
 
   static const Color primaryWhite = Colors.white;
   static const Color primaryBlack = Colors.black;
+  static const Color primaryRed = Colors.red;
 }

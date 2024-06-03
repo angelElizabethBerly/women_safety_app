@@ -11,6 +11,7 @@ import 'package:women_safety_app/view/home_screen/widgets/emergency_widgets/cont
 import 'package:women_safety_app/view/home_screen/widgets/emergency_widgets/police_emergency.dart';
 import 'package:women_safety_app/view/home_screen/widgets/emergency_widgets/sos_emergency.dart';
 import 'package:women_safety_app/view/home_screen/widgets/navigation_widgets.dart';
+import 'package:women_safety_app/view/home_screen/widgets/send_location_widget/send_location_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -56,10 +57,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SingleChildScrollView(
-            physics: AlwaysScrollableScrollPhysics(),
+        child: SingleChildScrollView(
+          physics: AlwaysScrollableScrollPhysics(),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -103,6 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Divider(color: ColorConstants.darkPink),
                 SizedBox(height: 5),
                 NavigationWidget(),
+                SendLocationWidget(),
                 SizedBox(height: 20),
                 Text("ARTICLES",
                     style:

@@ -1,13 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:women_safety_app/controller/login_screen_controller.dart';
 import 'package:women_safety_app/global_widgets/custom_textfield.dart';
 import 'package:women_safety_app/global_widgets/primary_button.dart';
 import 'package:women_safety_app/global_widgets/secondary_button.dart';
 import 'package:women_safety_app/utils/color_constants.dart';
 import 'package:women_safety_app/utils/image_constants.dart';
-import 'package:women_safety_app/view/home_screen/home_screen.dart';
-import 'package:women_safety_app/view/register_option_screen/register_option_screen.dart';
+import 'package:women_safety_app/view/register_user_screen/register_user_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -17,84 +18,82 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final formKey = GlobalKey<FormState>();
+  final formData = Map<String, Object>();
   @override
   Widget build(BuildContext context) {
+    final loginScreenState = context.watch<LoginScreenController>();
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Image.asset(ImageConstants.appLogo, height: 100, width: 100),
-          SizedBox(height: 25),
-          Center(
-              child: Text(
-            "LOGIN",
-            style: TextStyle(
-                fontWeight: FontWeight.w200,
-                fontSize: 30,
-                color: ColorConstants.darkPink),
-          )),
-          SizedBox(height: 25),
-          CustomTextFieldWidget(
-            labelText: "Username",
-            prefix: Icon(Icons.person, color: ColorConstants.darkPink),
-          ),
-          // TextFormField(
-          //   decoration: InputDecoration(
-          //       enabledBorder: OutlineInputBorder(
-          //           borderSide:
-          //               BorderSide(width: 2, color: ColorConstants.primaryPink),
-          //           borderRadius: BorderRadius.circular(10)),
-          //       border: OutlineInputBorder(
-          //           borderSide: BorderSide(width: 3),
-          //           borderRadius: BorderRadius.circular(10)),
-          //       filled: true,
-          //       fillColor: ColorConstants.primaryWhite,
-          //       labelText: "Username",
-          //       labelStyle: TextStyle(
-          //         color: ColorConstants.darkPink,
-          //         fontWeight: FontWeight.w200,
-          //       )),
-          // ),
-          SizedBox(height: 20),
-          CustomTextFieldWidget(
-            labelText: "Password",
-            prefix: Icon(Icons.key, color: ColorConstants.darkPink),
-          ),
-          // TextFormField(
-          //   decoration: InputDecoration(
-          //       enabledBorder: OutlineInputBorder(
-          //           borderSide:
-          //               BorderSide(width: 2, color: ColorConstants.primaryPink),
-          //           borderRadius: BorderRadius.circular(10)),
-          //       border: OutlineInputBorder(
-          //           borderSide: BorderSide(width: 3),
-          //           borderRadius: BorderRadius.circular(10)),
-          //       filled: true,
-          //       fillColor: ColorConstants.primaryWhite,
-          //       labelText: "Password",
-          //       labelStyle: TextStyle(
-          //         color: ColorConstants.darkPink,
-          //         fontWeight: FontWeight.w200,
-          //       )),
-          //   obscureText: true,
-          // ),
-          SizedBox(height: 20),
-          PrimaryButtonWidget(title: "Login", onPressed: () {}),
-          Align(
-              alignment: Alignment.centerRight,
-              child: SecondaryButtonWidget(
-                  title: "Forgot Password?", onPressed: () {}))
-          // ElevatedButton(
-          //     onPressed: () {
-          //       Navigator.pushReplacement(context,
-          //           MaterialPageRoute(builder: (context) => HomeScreen()));
-          //     },
-          //     style: ButtonStyle(
-          //         backgroundColor:
-          //             WidgetStatePropertyAll(ColorConstants.darkPink)),
-          //     child: Text("Login",
-          //         style: TextStyle(color: ColorConstants.primaryWhite))),
-        ]),
+        child: Form(
+          key: formKey,
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Image.asset(ImageConstants.appLogo, height: 100, width: 100),
+            SizedBox(height: 25),
+            Center(
+                child: Text(
+              "LOGIN",
+              style: TextStyle(
+                  fontWeight: FontWeight.w200,
+                  fontSize: 30,
+                  color: ColorConstants.darkPink),
+            )),
+            SizedBox(height: 25),
+            CustomTextFieldWidget(
+                labelText: "Enter email",
+                prefix: Icon(Icons.person, color: ColorConstants.darkPink),
+                textInputAction: TextInputAction.next,
+                keyboardType: TextInputType.emailAddress,
+                validate: (email) {
+                  if (email!.isEmpty ||
+                      email.length < 3 ||
+                      !email.contains("@")) {
+                    return "Enter valid email";
+                  }
+                  return null;
+                },
+                onSave: (email) {
+                  formData["email"] = email ?? "";
+                }),
+            SizedBox(height: 20),
+            CustomTextFieldWidget(
+                labelText: "Enter password",
+                prefix: Icon(Icons.key, color: ColorConstants.darkPink),
+                isPassword: loginScreenState.isPasswordShown,
+                suffix: IconButton(
+                    onPressed: () {
+                      context.read<LoginScreenController>().showPassword();
+                    },
+                    icon: loginScreenState.isPasswordShown
+                        ? Icon(Icons.visibility_off,
+                            color: ColorConstants.darkPink)
+                        : Icon(Icons.visibility,
+                            color: ColorConstants.darkPink)),
+                validate: (password) {
+                  if (password!.isEmpty || password.length < 7) {
+                    return "Enter valid password";
+                  }
+                  return null;
+                },
+                onSave: (password) {
+                  formData["password"] = password ?? "";
+                }),
+            SizedBox(height: 20),
+            PrimaryButtonWidget(
+                title: "Login",
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    onSubmit();
+                  }
+                }),
+            Align(
+                alignment: Alignment.centerRight,
+                child: SecondaryButtonWidget(
+                    title: "Forgot Password?", onPressed: () {}))
+          ]),
+        ),
       ),
       bottomNavigationBar: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -104,20 +103,22 @@ class _LoginScreenState extends State<LoginScreen> {
             "Don't have an account?",
             style: TextStyle(fontSize: 15),
           ),
-          SecondaryButtonWidget(title: "Register", onPressed: () {})
-          // TextButton(
-          //     onPressed: () {
-          //       Navigator.pushReplacement(
-          //           context,
-          //           MaterialPageRoute(
-          //               builder: (context) => RegisterOptionScreen()));
-          //     },
-          //     child: Text(
-          //       "Register",
-          //       style: TextStyle(fontSize: 15, color: ColorConstants.darkPink),
-          //     ))
+          SecondaryButtonWidget(
+              title: "Register",
+              onPressed: () {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => RegisterUserScreen()));
+              })
         ],
       ),
     );
+  }
+
+  onSubmit() {
+    formKey.currentState!.save();
+    print(formData["email"]);
+    print(formData["password"]);
   }
 }

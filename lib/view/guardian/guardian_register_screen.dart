@@ -7,17 +7,16 @@ import 'package:women_safety_app/global_widgets/custom_textfield.dart';
 import 'package:women_safety_app/global_widgets/primary_button.dart';
 import 'package:women_safety_app/global_widgets/secondary_button.dart';
 import 'package:women_safety_app/utils/color_constants.dart';
-import 'package:women_safety_app/view/guardian/guardian_register_screen.dart';
 import 'package:women_safety_app/view/login_screen/login_screen.dart';
 
-class RegisterUserScreen extends StatefulWidget {
-  const RegisterUserScreen({super.key});
+class GuardianRegisterScreen extends StatefulWidget {
+  const GuardianRegisterScreen({super.key});
 
   @override
-  State<RegisterUserScreen> createState() => _RegisterUserScreenState();
+  State<GuardianRegisterScreen> createState() => _GuardianRegisterScreenState();
 }
 
-class _RegisterUserScreenState extends State<RegisterUserScreen> {
+class _GuardianRegisterScreenState extends State<GuardianRegisterScreen> {
   final formKey = GlobalKey<FormState>();
   final formData = Map<String, Object>();
 
@@ -36,7 +35,7 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
               SizedBox(height: 70),
               Center(
                   child: Text(
-                "REGISTER",
+                "REGISTER AS GUARDIAN",
                 style: TextStyle(
                     fontWeight: FontWeight.w200,
                     fontSize: 30,
@@ -92,20 +91,20 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                   }),
               SizedBox(height: 20),
               CustomTextFieldWidget(
-                  labelText: "Enter guardian email",
+                  labelText: "Enter user email",
                   prefix: Icon(Icons.mail, color: ColorConstants.darkPink),
                   textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.emailAddress,
-                  validate: (guardEmail) {
-                    if (guardEmail!.isEmpty ||
-                        guardEmail.length < 3 ||
-                        !guardEmail.contains("@")) {
+                  validate: (userEmail) {
+                    if (userEmail!.isEmpty ||
+                        userEmail.length < 3 ||
+                        !userEmail.contains("@")) {
                       return "Enter valid email";
                     }
                     return null;
                   },
-                  onSave: (guardEmail) {
-                    formData["guardEmail"] = guardEmail ?? "";
+                  onSave: (userEmail) {
+                    formData["userEmail"] = userEmail ?? "";
                   }),
               SizedBox(height: 20),
               CustomTextFieldWidget(
@@ -161,17 +160,6 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                       onSubmit();
                     }
                   }),
-              Align(
-                  alignment: Alignment.centerRight,
-                  child: SecondaryButtonWidget(
-                      title: "Register as Guardian",
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    GuardianRegisterScreen()));
-                      }))
             ]),
           ),
         ),
@@ -190,16 +178,6 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                 Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (context) => LoginScreen()));
               }),
-          // TextButton(
-          //     onPressed: () {
-          //       Navigator.pushReplacement(context,
-          //           MaterialPageRoute(builder: (context) => LoginScreen()));
-          //     },
-          //     child: Text(
-          //       "Log In",
-          //       style:
-          //           TextStyle(fontSize: 15, color: ColorConstants.primaryBlack),
-          //     ))
         ],
       ),
     );

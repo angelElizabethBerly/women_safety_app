@@ -20,7 +20,7 @@ class CustomTextFieldWidget extends StatelessWidget {
   final String? labelText;
   final TextEditingController? controller;
   final String? Function(String?)? validate;
-  final String? Function(String?)? onSave;
+  final Function(String?)? onSave;
   final int? maxLines;
   final bool isPassword;
   final bool enable;

@@ -11,7 +11,7 @@ class SecondaryButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
         onPressed: () {
-          onPressed;
+          onPressed();
         },
         child: Text(
           title,

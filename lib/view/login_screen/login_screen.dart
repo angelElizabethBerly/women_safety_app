@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:women_safety_app/controller/login_screen_controller.dart';
+import 'package:women_safety_app/controller/register_screen_controller.dart';
 import 'package:women_safety_app/global_widgets/custom_textfield.dart';
 import 'package:women_safety_app/global_widgets/primary_button.dart';
 import 'package:women_safety_app/global_widgets/secondary_button.dart';
@@ -84,9 +85,12 @@ class _LoginScreenState extends State<LoginScreen> {
             PrimaryButtonWidget(
                 title: "Login",
                 onPressed: () {
-                  if (formKey.currentState!.validate()) {
-                    onSubmit();
-                  }
+                  context
+                      .read<RegisterScreenController>()
+                      .progressIndicator(context);
+                  // if (formKey.currentState!.validate()) {
+                  // onSubmit();
+                  // }
                 }),
             Align(
                 alignment: Alignment.centerRight,

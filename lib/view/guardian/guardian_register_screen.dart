@@ -185,6 +185,7 @@ class _GuardianRegisterScreenState extends State<GuardianRegisterScreen> {
 
   onSubmit() {
     formKey.currentState!.save();
+    context.read<RegisterScreenController>().progressIndicator(context);
     print(formData["email"]);
     print(formData["password"]);
   }

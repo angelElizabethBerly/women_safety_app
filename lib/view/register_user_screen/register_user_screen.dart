@@ -1,11 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:women_safety_app/controller/register_screen_controller.dart';
 import 'package:women_safety_app/global_widgets/custom_textfield.dart';
 import 'package:women_safety_app/global_widgets/primary_button.dart';
 import 'package:women_safety_app/global_widgets/secondary_button.dart';
+import 'package:women_safety_app/model/user_model.dart';
 import 'package:women_safety_app/utils/color_constants.dart';
 import 'package:women_safety_app/view/guardian/guardian_register_screen.dart';
 import 'package:women_safety_app/view/login_screen/login_screen.dart';
@@ -151,7 +154,7 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                     return null;
                   },
                   onSave: (password) {
-                    formData["password"] = password ?? "";
+                    formData["rePassword"] = password ?? "";
                   }),
               SizedBox(height: 20),
               PrimaryButtonWidget(
@@ -190,16 +193,6 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                 Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (context) => LoginScreen()));
               }),
-          // TextButton(
-          //     onPressed: () {
-          //       Navigator.pushReplacement(context,
-          //           MaterialPageRoute(builder: (context) => LoginScreen()));
-          //     },
-          //     child: Text(
-          //       "Log In",
-          //       style:
-          //           TextStyle(fontSize: 15, color: ColorConstants.primaryBlack),
-          //     ))
         ],
       ),
     );
@@ -207,6 +200,44 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
 
   onSubmit() {
     formKey.currentState!.save();
+    if (formData["password"] != formData["rePassword"]) {
+      context.read<RegisterScreenController>().dialogBox(
+          context, "The Password and Confirm Password does not match");
+    } else {
+      context.read<RegisterScreenController>().progressIndicator(context);
+      try {
+        FirebaseAuth auth = FirebaseAuth.instance;
+        auth
+            .createUserWithEmailAndPassword(
+                email: formData["email"].toString(),
+                password: formData["password"].toString())
+            .then((v) async {
+          DocumentReference<Map<String, dynamic>> db =
+              FirebaseFirestore.instance.collection('users').doc(v.user!.uid);
+          final user = UserModel(
+              name: formData['name'].toString(),
+              phone: formData['phone'].toString(),
+              userEmail: formData['email'].toString(),
+              guardianEmail: formData['guardEmail'].toString(),
+              id: v.user!.uid);
+          final userRegisterData = user.toJson();
+          await db.set(userRegisterData).whenComplete(
+            () {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => LoginScreen()));
+            },
+          );
+        });
+      } on FirebaseAuthException catch (e) {
+        context
+            .read<RegisterScreenController>()
+            .dialogBox(context, e.toString());
+      } catch (e) {
+        context
+            .read<RegisterScreenController>()
+            .dialogBox(context, e.toString());
+      }
+    }
     print(formData["email"]);
     print(formData["password"]);
   }

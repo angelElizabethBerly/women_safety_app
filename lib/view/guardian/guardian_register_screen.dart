@@ -150,7 +150,7 @@ class _GuardianRegisterScreenState extends State<GuardianRegisterScreen> {
                     return null;
                   },
                   onSave: (password) {
-                    formData["password"] = password ?? "";
+                    formData["rePassword"] = password ?? "";
                   }),
               SizedBox(height: 20),
               PrimaryButtonWidget(

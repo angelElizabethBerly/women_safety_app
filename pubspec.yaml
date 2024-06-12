@@ -41,6 +41,7 @@ dependencies:
   flutter_phone_direct_caller: ^2.1.1
   fluttertoast: ^8.2.5
   firebase_auth: ^4.20.0
+  cloud_firestore: ^4.17.5
 
 dev_dependencies:
   flutter_test:

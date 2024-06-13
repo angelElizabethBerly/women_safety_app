@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:women_safety_app/controller/login_screen_controller.dart';
@@ -81,13 +82,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   formData["password"] = password ?? "";
                 }),
             SizedBox(height: 20),
-            PrimaryButtonWidget(
-                title: "Login",
-                onPressed: () {
-                  if (formKey.currentState!.validate()) {
-                    onSubmit();
-                  }
-                }),
+            loginScreenState.isLoading
+                ? CircularProgressIndicator()
+                : PrimaryButtonWidget(
+                    title: "Login",
+                    onPressed: () async {
+                      if (formKey.currentState!.validate()) {
+                        await onSubmit();
+                      }
+                    }),
             Align(
                 alignment: Alignment.centerRight,
                 child: SecondaryButtonWidget(
@@ -116,9 +119,10 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  onSubmit() {
+  onSubmit() async {
     formKey.currentState!.save();
-
+    context.read<LoginScreenController>().onLogin(
+        context, formData["email"].toString(), formData["password"].toString());
     print(formData["email"]);
     print(formData["password"]);
   }

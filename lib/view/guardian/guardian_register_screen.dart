@@ -87,7 +87,7 @@ class _GuardianRegisterScreenState extends State<GuardianRegisterScreen> {
                     return null;
                   },
                   onSave: (email) {
-                    formData["email"] = email ?? "";
+                    formData["guardEmail"] = email ?? "";
                   }),
               SizedBox(height: 20),
               CustomTextFieldWidget(
@@ -133,10 +133,12 @@ class _GuardianRegisterScreenState extends State<GuardianRegisterScreen> {
               CustomTextFieldWidget(
                   labelText: "Confirm password",
                   prefix: Icon(Icons.key, color: ColorConstants.darkPink),
-                  isPassword: registerScreenState.isPasswordShown,
+                  isPassword: registerScreenState.isConfirmPasswordShown,
                   suffix: IconButton(
                       onPressed: () {
-                        context.read<RegisterScreenController>().showPassword();
+                        context
+                            .read<RegisterScreenController>()
+                            .showConfirmPassword();
                       },
                       icon: registerScreenState.isPasswordShown
                           ? Icon(Icons.visibility_off,
@@ -153,13 +155,15 @@ class _GuardianRegisterScreenState extends State<GuardianRegisterScreen> {
                     formData["rePassword"] = password ?? "";
                   }),
               SizedBox(height: 20),
-              PrimaryButtonWidget(
-                  title: "Register",
-                  onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      onSubmit();
-                    }
-                  }),
+              registerScreenState.isLoading
+                  ? CircularProgressIndicator()
+                  : PrimaryButtonWidget(
+                      title: "Register",
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {
+                          onSubmit();
+                        }
+                      }),
             ]),
           ),
         ),
@@ -183,10 +187,20 @@ class _GuardianRegisterScreenState extends State<GuardianRegisterScreen> {
     );
   }
 
-  onSubmit() {
+  onSubmit() async {
     formKey.currentState!.save();
-    context.read<RegisterScreenController>().progressIndicator(context);
-    print(formData["email"]);
+    if (formData["password"] != formData["rePassword"]) {
+      context.read<RegisterScreenController>().dialogBox(
+          context, "The Password and Confirm Password does not match");
+    } else {
+      context.read<RegisterScreenController>().onRegister(context,
+          email: formData["userEmail"].toString(),
+          password: formData["password"].toString(),
+          name: formData['name'].toString(),
+          phone: formData['phone'].toString(),
+          guardEmail: formData['guardEmail'].toString());
+    }
+    print(formData["guardEmail"]);
     print(formData["password"]);
   }
 }

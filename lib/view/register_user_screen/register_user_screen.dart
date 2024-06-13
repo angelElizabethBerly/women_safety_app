@@ -1,14 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:women_safety_app/controller/register_screen_controller.dart';
 import 'package:women_safety_app/global_widgets/custom_textfield.dart';
 import 'package:women_safety_app/global_widgets/primary_button.dart';
 import 'package:women_safety_app/global_widgets/secondary_button.dart';
-import 'package:women_safety_app/model/user_model.dart';
 import 'package:women_safety_app/utils/color_constants.dart';
 import 'package:women_safety_app/view/guardian/guardian_register_screen.dart';
 import 'package:women_safety_app/view/login_screen/login_screen.dart';
@@ -91,7 +88,7 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                     return null;
                   },
                   onSave: (email) {
-                    formData["email"] = email ?? "";
+                    formData["userEmail"] = email ?? "";
                   }),
               SizedBox(height: 20),
               CustomTextFieldWidget(
@@ -137,10 +134,12 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
               CustomTextFieldWidget(
                   labelText: "Confirm password",
                   prefix: Icon(Icons.key, color: ColorConstants.darkPink),
-                  isPassword: registerScreenState.isPasswordShown,
+                  isPassword: registerScreenState.isConfirmPasswordShown,
                   suffix: IconButton(
                       onPressed: () {
-                        context.read<RegisterScreenController>().showPassword();
+                        context
+                            .read<RegisterScreenController>()
+                            .showConfirmPassword();
                       },
                       icon: registerScreenState.isPasswordShown
                           ? Icon(Icons.visibility_off,
@@ -157,13 +156,15 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                     formData["rePassword"] = password ?? "";
                   }),
               SizedBox(height: 20),
-              PrimaryButtonWidget(
-                  title: "Register",
-                  onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      onSubmit();
-                    }
-                  }),
+              registerScreenState.isLoading
+                  ? CircularProgressIndicator()
+                  : PrimaryButtonWidget(
+                      title: "Register",
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {
+                          onSubmit();
+                        }
+                      }),
               Align(
                   alignment: Alignment.centerRight,
                   child: SecondaryButtonWidget(
@@ -198,47 +199,20 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
     );
   }
 
-  onSubmit() {
+  onSubmit() async {
     formKey.currentState!.save();
     if (formData["password"] != formData["rePassword"]) {
       context.read<RegisterScreenController>().dialogBox(
           context, "The Password and Confirm Password does not match");
     } else {
-      context.read<RegisterScreenController>().progressIndicator(context);
-      try {
-        FirebaseAuth auth = FirebaseAuth.instance;
-        auth
-            .createUserWithEmailAndPassword(
-                email: formData["email"].toString(),
-                password: formData["password"].toString())
-            .then((v) async {
-          DocumentReference<Map<String, dynamic>> db =
-              FirebaseFirestore.instance.collection('users').doc(v.user!.uid);
-          final user = UserModel(
-              name: formData['name'].toString(),
-              phone: formData['phone'].toString(),
-              userEmail: formData['email'].toString(),
-              guardianEmail: formData['guardEmail'].toString(),
-              id: v.user!.uid);
-          final userRegisterData = user.toJson();
-          await db.set(userRegisterData).whenComplete(
-            () {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()));
-            },
-          );
-        });
-      } on FirebaseAuthException catch (e) {
-        context
-            .read<RegisterScreenController>()
-            .dialogBox(context, e.toString());
-      } catch (e) {
-        context
-            .read<RegisterScreenController>()
-            .dialogBox(context, e.toString());
-      }
+      context.read<RegisterScreenController>().onRegister(context,
+          email: formData["userEmail"].toString(),
+          password: formData["password"].toString(),
+          name: formData['name'].toString(),
+          phone: formData['phone'].toString(),
+          guardEmail: formData['guardEmail'].toString());
     }
-    print(formData["email"]);
+    print(formData["userEmail"]);
     print(formData["password"]);
   }
 }

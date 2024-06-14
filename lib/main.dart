@@ -7,6 +7,7 @@ import 'package:women_safety_app/controller/home_screen_controller.dart';
 import 'package:women_safety_app/controller/login_screen_controller.dart';
 import 'package:women_safety_app/controller/register_screen_controller.dart';
 import 'package:women_safety_app/firebase_options.dart';
+import 'package:women_safety_app/utils/my_shared_preference.dart';
 import 'package:women_safety_app/view/splash_screen/splash_screen.dart';
 
 void main() async {
@@ -14,6 +15,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  MySharedPreference.init();
   runApp(const MyApp());
 }
 

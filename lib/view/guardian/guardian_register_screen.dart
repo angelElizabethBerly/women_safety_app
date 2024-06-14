@@ -194,11 +194,12 @@ class _GuardianRegisterScreenState extends State<GuardianRegisterScreen> {
           context, "The Password and Confirm Password does not match");
     } else {
       context.read<RegisterScreenController>().onRegister(context,
-          email: formData["userEmail"].toString(),
+          email: formData["guardEmail"].toString(),
           password: formData["password"].toString(),
           name: formData['name'].toString(),
           phone: formData['phone'].toString(),
-          guardEmail: formData['guardEmail'].toString());
+          emergEmail: formData['userEmail'].toString(),
+          type: 'guardian');
     }
     print(formData["guardEmail"]);
     print(formData["password"]);

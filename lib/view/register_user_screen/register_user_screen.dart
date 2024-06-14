@@ -210,7 +210,8 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
           password: formData["password"].toString(),
           name: formData['name'].toString(),
           phone: formData['phone'].toString(),
-          guardEmail: formData['guardEmail'].toString());
+          emergEmail: formData['guardEmail'].toString(),
+          type: 'user');
     }
     print(formData["userEmail"]);
     print(formData["password"]);

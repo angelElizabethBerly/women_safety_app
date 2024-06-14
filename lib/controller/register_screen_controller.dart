@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:women_safety_app/model/user_model.dart';
 import 'package:women_safety_app/utils/color_constants.dart';
+import 'package:women_safety_app/view/guardian/guardian_home_screen.dart';
 import 'package:women_safety_app/view/login_screen/login_screen.dart';
 
 class RegisterScreenController with ChangeNotifier {
@@ -51,7 +52,8 @@ class RegisterScreenController with ChangeNotifier {
       required String password,
       required String name,
       required String phone,
-      required String guardEmail}) async {
+      required String emergEmail,
+      required String type}) async {
     try {
       isLoading = true;
       notifyListeners();
@@ -65,13 +67,15 @@ class RegisterScreenController with ChangeNotifier {
             name: name,
             phone: phone,
             userEmail: email,
-            guardianEmail: guardEmail,
-            id: v);
+            emergEmail: emergEmail,
+            id: v,
+            type: type);
         final userRegisterData = user.toJson();
         await db.set(userRegisterData).whenComplete(
           () {
             isLoading = false;
             notifyListeners();
+
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 content: Text("Registration complete"),
                 backgroundColor: ColorConstants.darkPink));

@@ -3,15 +3,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:women_safety_app/controller/home_screen_controller.dart';
-import 'package:women_safety_app/view/home_screen/widgets/custom_carousel.dart';
+import 'package:women_safety_app/view/user_screens/home_screen/widgets/custom_carousel.dart';
 import 'package:women_safety_app/utils/color_constants.dart';
 import 'package:women_safety_app/utils/women_database.dart';
-import 'package:women_safety_app/view/home_screen/widgets/emergency_widgets/ambulance_emergency.dart';
-import 'package:women_safety_app/view/home_screen/widgets/emergency_widgets/contact_emergency.dart';
-import 'package:women_safety_app/view/home_screen/widgets/emergency_widgets/police_emergency.dart';
-import 'package:women_safety_app/view/home_screen/widgets/emergency_widgets/sos_emergency.dart';
-import 'package:women_safety_app/view/home_screen/widgets/navigation_widgets.dart';
-import 'package:women_safety_app/view/home_screen/widgets/send_location_widget/send_location_widget.dart';
+import 'package:women_safety_app/view/user_screens/home_screen/widgets/emergency_widgets/ambulance_emergency.dart';
+import 'package:women_safety_app/view/user_screens/home_screen/widgets/emergency_widgets/contact_emergency.dart';
+import 'package:women_safety_app/view/user_screens/home_screen/widgets/emergency_widgets/police_emergency.dart';
+import 'package:women_safety_app/view/user_screens/home_screen/widgets/emergency_widgets/sos_emergency.dart';
+import 'package:women_safety_app/view/user_screens/home_screen/widgets/navigation_widgets.dart';
+import 'package:women_safety_app/view/user_screens/home_screen/widgets/send_location_widget/send_location_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

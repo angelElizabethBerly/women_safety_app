@@ -7,7 +7,7 @@ import 'package:women_safety_app/global_widgets/custom_textfield.dart';
 import 'package:women_safety_app/global_widgets/primary_button.dart';
 import 'package:women_safety_app/global_widgets/secondary_button.dart';
 import 'package:women_safety_app/utils/color_constants.dart';
-import 'package:women_safety_app/view/login_screen/login_screen.dart';
+import 'package:women_safety_app/view/user_screens/login_screen/login_screen.dart';
 
 class GuardianRegisterScreen extends StatefulWidget {
   const GuardianRegisterScreen({super.key});

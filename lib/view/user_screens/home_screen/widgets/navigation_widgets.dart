@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:women_safety_app/controller/home_screen_controller.dart';
-import 'package:women_safety_app/view/home_screen/widgets/near_me_widgets/hospital_near_me_widget.dart';
-import 'package:women_safety_app/view/home_screen/widgets/near_me_widgets/pharmacy_near_me_widget.dart';
-import 'package:women_safety_app/view/home_screen/widgets/near_me_widgets/police_near_me_widget.dart';
+import 'package:women_safety_app/view/user_screens/home_screen/widgets/near_me_widgets/hospital_near_me_widget.dart';
+import 'package:women_safety_app/view/user_screens/home_screen/widgets/near_me_widgets/pharmacy_near_me_widget.dart';
+import 'package:women_safety_app/view/user_screens/home_screen/widgets/near_me_widgets/police_near_me_widget.dart';
 
 class NavigationWidget extends StatelessWidget {
   const NavigationWidget({super.key});

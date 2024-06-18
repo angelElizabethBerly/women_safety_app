@@ -8,7 +8,7 @@ import 'package:women_safety_app/global_widgets/primary_button.dart';
 import 'package:women_safety_app/global_widgets/secondary_button.dart';
 import 'package:women_safety_app/utils/color_constants.dart';
 import 'package:women_safety_app/utils/image_constants.dart';
-import 'package:women_safety_app/view/register_user_screen/register_user_screen.dart';
+import 'package:women_safety_app/view/user_screens/register_user_screen/register_user_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:women_safety_app/utils/color_constants.dart';
 import 'package:women_safety_app/utils/my_shared_preference.dart';
-import 'package:women_safety_app/view/guardian/guardian_home_screen.dart';
-import 'package:women_safety_app/view/home_screen/home_screen.dart';
+import 'package:women_safety_app/view/guardian_screens/guardian_home_screen/guardian_home_screen.dart';
+import 'package:women_safety_app/view/user_screens/home_screen/home_screen.dart';
 
 class LoginScreenController with ChangeNotifier {
   bool isPasswordShown = true;

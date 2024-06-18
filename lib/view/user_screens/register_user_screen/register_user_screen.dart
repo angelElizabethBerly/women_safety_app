@@ -7,8 +7,8 @@ import 'package:women_safety_app/global_widgets/custom_textfield.dart';
 import 'package:women_safety_app/global_widgets/primary_button.dart';
 import 'package:women_safety_app/global_widgets/secondary_button.dart';
 import 'package:women_safety_app/utils/color_constants.dart';
-import 'package:women_safety_app/view/guardian/guardian_register_screen.dart';
-import 'package:women_safety_app/view/login_screen/login_screen.dart';
+import 'package:women_safety_app/view/guardian_screens/guardian_register_screen/guardian_register_screen.dart';
+import 'package:women_safety_app/view/user_screens/login_screen/login_screen.dart';
 
 class RegisterUserScreen extends StatefulWidget {
   const RegisterUserScreen({super.key});

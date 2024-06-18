@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:women_safety_app/model/user_model.dart';
 import 'package:women_safety_app/utils/color_constants.dart';
-import 'package:women_safety_app/view/guardian/guardian_home_screen.dart';
-import 'package:women_safety_app/view/login_screen/login_screen.dart';
+import 'package:women_safety_app/view/user_screens/login_screen/login_screen.dart';
 
 class RegisterScreenController with ChangeNotifier {
   bool isPasswordShown = true;

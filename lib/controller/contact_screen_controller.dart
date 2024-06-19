@@ -6,17 +6,14 @@ import 'package:permission_handler/permission_handler.dart';
 class ContactScreenController with ChangeNotifier {
   List<Contact> contacts = [];
   List<Contact> filteredContacts = [];
-  List<Contact> get fContact =>
-      filteredContacts.isEmpty ? contacts : filteredContacts;
+  // List<Contact> get fContact =>
+  //     filteredContacts.isEmpty ? contacts : filteredContacts;
 
   Future<void> askPermission(
       BuildContext context, TextEditingController controller) async {
     PermissionStatus permissionStatus = await getContactsPermission();
     if (permissionStatus == PermissionStatus.granted) {
       getAllContacts();
-      // controller.addListener(() {
-      // filterContacts(controller);
-      // });
     } else {
       handleInvalidPermissions(permissionStatus, context);
     }

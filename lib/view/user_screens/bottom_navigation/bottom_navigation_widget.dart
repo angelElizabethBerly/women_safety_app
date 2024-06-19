@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:women_safety_app/controller/bottom_navigation_controller.dart';
 import 'package:women_safety_app/utils/color_constants.dart';
 import 'package:women_safety_app/view/user_screens/chat_screen/chat_screen.dart';
+import 'package:women_safety_app/view/user_screens/contact_screen/contact_screen.dart';
 import 'package:women_safety_app/view/user_screens/home_screen/home_screen.dart';
 import 'package:women_safety_app/view/user_screens/profile_screen/profile_screen.dart';
 import 'package:women_safety_app/view/user_screens/review_screen/review_screen.dart';
@@ -19,6 +20,7 @@ class BottomNavWidget extends StatefulWidget {
 class _BottomNavWidgetState extends State<BottomNavWidget> {
   List<Widget> pages = [
     HomeScreen(),
+    ContactScreen(),
     ChatScreen(),
     ProfileScreen(),
     ReviewScreen()
@@ -39,6 +41,8 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
           },
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.contacts), label: "Contacts"),
             BottomNavigationBarItem(
                 icon: Icon(Icons.chat_bubble), label: "Chats"),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),

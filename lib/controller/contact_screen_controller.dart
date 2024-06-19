@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 
 import 'package:permission_handler/permission_handler.dart';
+import 'package:women_safety_app/model/contact_model.dart';
+import 'package:women_safety_app/utils/color_constants.dart';
+import 'package:women_safety_app/utils/db_services.dart';
 
 class ContactScreenController with ChangeNotifier {
   List<Contact> contacts = [];
   List<Contact> filteredContacts = [];
-  // List<Contact> get fContact =>
-  //     filteredContacts.isEmpty ? contacts : filteredContacts;
+  DatabaseHelper _databaseHelper = DatabaseHelper();
 
   Future<void> askPermission(
       BuildContext context, TextEditingController controller) async {
@@ -42,7 +44,8 @@ class ContactScreenController with ChangeNotifier {
   }
 
   getAllContacts() async {
-    List<Contact> _contacts = await FlutterContacts.getContacts();
+    List<Contact> _contacts =
+        await FlutterContacts.getContacts(withProperties: true);
     contacts = _contacts;
     notifyListeners();
   }
@@ -77,5 +80,19 @@ class ContactScreenController with ChangeNotifier {
       ).toList();
     }
     notifyListeners();
+  }
+
+  void addContact(TruContact newContact, BuildContext context) async {
+    int result = await _databaseHelper.insertContacts(newContact);
+    if (result != 0) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Contact added successfully"),
+          backgroundColor: ColorConstants.primaryPink));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Failed to add contact"),
+          backgroundColor: ColorConstants.primaryRed));
+    }
+    Navigator.of(context).pop(true);
   }
 }

@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:women_safety_app/controller/add_contact_screen_controller.dart';
 import 'package:women_safety_app/controller/bottom_navigation_controller.dart';
 import 'package:women_safety_app/controller/contact_screen_controller.dart';
 import 'package:women_safety_app/controller/home_screen_controller.dart';
@@ -36,6 +37,8 @@ class MyApp extends StatelessWidget {
               create: (context) => BottomNavigationController()),
           ChangeNotifierProvider(
               create: (context) => ContactScreenController()),
+          ChangeNotifierProvider(
+              create: (context) => AddContactScreenController()),
         ],
         child: MaterialApp(
             debugShowCheckedModeBanner: false, home: SplashScreen()));

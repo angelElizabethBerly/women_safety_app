@@ -1,12 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:women_safety_app/controller/add_contact_screen_controller.dart';
 import 'package:women_safety_app/global_widgets/primary_button.dart';
+import 'package:women_safety_app/utils/color_constants.dart';
 import 'package:women_safety_app/view/user_screens/contact_screen/contact_screen.dart';
 
-class AddContactScreen extends StatelessWidget {
+class AddContactScreen extends StatefulWidget {
   const AddContactScreen({super.key});
 
   @override
+  State<AddContactScreen> createState() => _AddContactScreenState();
+}
+
+class _AddContactScreenState extends State<AddContactScreen> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) {
+        context.read<AddContactScreenController>().showList();
+      },
+    );
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final addContactScreenState = context.watch<AddContactScreenController>();
     return SafeArea(
       child: Container(
           child: Padding(
@@ -15,10 +34,34 @@ class AddContactScreen extends StatelessWidget {
           children: [
             PrimaryButtonWidget(
                 title: "Add Trusted Contacts",
-                onPressed: () {
-                  Navigator.push(context,
+                onPressed: () async {
+                  bool result = await Navigator.push(context,
                       MaterialPageRoute(builder: (context) => ContactScreen()));
-                })
+                  if (result == true) {
+                    context.read<AddContactScreenController>().showList();
+                  }
+                }),
+            Expanded(
+              child: ListView.builder(
+                itemCount: addContactScreenState.count,
+                itemBuilder: (context, index) {
+                  return Card(
+                      child: ListTile(
+                    title: Text(addContactScreenState.contactList[index].name),
+                    trailing: IconButton(
+                        onPressed: () {
+                          context
+                              .read<AddContactScreenController>()
+                              .deleteTruContact(
+                                  addContactScreenState.contactList[index],
+                                  context);
+                        },
+                        icon:
+                            Icon(Icons.delete, color: ColorConstants.darkPink)),
+                  ));
+                },
+              ),
+            )
           ],
         ),
       )),

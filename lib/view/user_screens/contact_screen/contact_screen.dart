@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:provider/provider.dart';
 import 'package:women_safety_app/controller/contact_screen_controller.dart';
+import 'package:women_safety_app/model/contact_model.dart';
 import 'package:women_safety_app/utils/color_constants.dart';
 
 class ContactScreen extends StatefulWidget {
@@ -62,9 +63,6 @@ class _ContactScreenState extends State<ContactScreen> {
                                     : contactScreenState.contacts[index];
                                 return ListTile(
                                     title: Text(contact.displayName),
-                                    // subtitle: Text(contact.phones.isEmpty
-                                    //     ? "No number added"
-                                    //     : contact.phones.first.number),
                                     leading: contact.photo != null &&
                                             contact.photo!.isNotEmpty
                                         ? CircleAvatar(
@@ -77,7 +75,26 @@ class _ContactScreenState extends State<ContactScreen> {
                                             child: Icon(Icons.person,
                                                 color: ColorConstants
                                                     .primaryWhite),
-                                          ));
+                                          ),
+                                    onTap: () {
+                                      if (contact.phones.isNotEmpty) {
+                                        final String phoneNum =
+                                            contact.phones.elementAt(0).number;
+                                        final String name = contact.displayName;
+                                        context
+                                            .read<ContactScreenController>()
+                                            .addContact(
+                                                TruContact(phoneNum, name),
+                                                context);
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                                content: Text(
+                                                    "No phone number for this contact"),
+                                                backgroundColor:
+                                                    ColorConstants.primaryRed));
+                                      }
+                                    });
                               },
                             ),
                           )

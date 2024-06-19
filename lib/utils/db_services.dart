@@ -33,7 +33,7 @@ class DatabaseHelper {
 
   void _createDbTable(Database db, int newVersion) async {
     await db.execute(
-        'CREATE TABLE $contactTable($colId INTEGER PRIMARY KEY AUTOINCREMENT), $colContactName TEXT, $colContactNumber TEXT)');
+        'CREATE TABLE $contactTable($colId INTEGER PRIMARY KEY AUTOINCREMENT, $colContactName TEXT, $colContactNumber TEXT)');
   }
 
   Future<List<Map<String, dynamic>>> getContactMapList() async {

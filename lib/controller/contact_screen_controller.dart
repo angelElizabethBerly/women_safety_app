@@ -42,8 +42,7 @@ class ContactScreenController with ChangeNotifier {
   }
 
   getAllContacts() async {
-    List<Contact> _contacts = await FlutterContacts.getContacts(
-        withProperties: true, withPhoto: true);
+    List<Contact> _contacts = await FlutterContacts.getContacts();
     contacts = _contacts;
     notifyListeners();
   }

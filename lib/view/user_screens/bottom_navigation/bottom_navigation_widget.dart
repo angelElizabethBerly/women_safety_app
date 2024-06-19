@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:women_safety_app/controller/bottom_navigation_controller.dart';
 import 'package:women_safety_app/utils/color_constants.dart';
+import 'package:women_safety_app/view/user_screens/add_contact_screen/add_contact_screen.dart';
 import 'package:women_safety_app/view/user_screens/chat_screen/chat_screen.dart';
 import 'package:women_safety_app/view/user_screens/contact_screen/contact_screen.dart';
 import 'package:women_safety_app/view/user_screens/home_screen/home_screen.dart';
@@ -20,7 +21,7 @@ class BottomNavWidget extends StatefulWidget {
 class _BottomNavWidgetState extends State<BottomNavWidget> {
   List<Widget> pages = [
     HomeScreen(),
-    ContactScreen(),
+    AddContactScreen(),
     ChatScreen(),
     ProfileScreen(),
     ReviewScreen()

@@ -62,9 +62,9 @@ class _ContactScreenState extends State<ContactScreen> {
                                     : contactScreenState.contacts[index];
                                 return ListTile(
                                     title: Text(contact.displayName),
-                                    subtitle: Text(contact.phones.isEmpty
-                                        ? "No number added"
-                                        : contact.phones.first.number),
+                                    // subtitle: Text(contact.phones.isEmpty
+                                    //     ? "No number added"
+                                    //     : contact.phones.first.number),
                                     leading: contact.photo != null &&
                                             contact.photo!.isNotEmpty
                                         ? CircleAvatar(

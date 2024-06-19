@@ -5,10 +5,18 @@ import 'package:permission_handler/permission_handler.dart';
 
 class ContactScreenController with ChangeNotifier {
   List<Contact> contacts = [];
-  Future<void> askPermission(BuildContext context) async {
+  List<Contact> filteredContacts = [];
+  List<Contact> get fContact =>
+      filteredContacts.isEmpty ? contacts : filteredContacts;
+
+  Future<void> askPermission(
+      BuildContext context, TextEditingController controller) async {
     PermissionStatus permissionStatus = await getContactsPermission();
     if (permissionStatus == PermissionStatus.granted) {
       getAllContacts();
+      // controller.addListener(() {
+      // filterContacts(controller);
+      // });
     } else {
       handleInvalidPermissions(permissionStatus, context);
     }
@@ -40,6 +48,38 @@ class ContactScreenController with ChangeNotifier {
     List<Contact> _contacts = await FlutterContacts.getContacts(
         withProperties: true, withPhoto: true);
     contacts = _contacts;
+    notifyListeners();
+  }
+
+  filterContacts(TextEditingController controller) {
+    List<Contact> _contacts = [];
+    _contacts.addAll(contacts);
+    if (controller.text.isNotEmpty) {
+      _contacts.retainWhere((element) {
+        String searchTerm = controller.text.toLowerCase();
+        String contactName = element.displayName.toLowerCase();
+        bool nameFound = contactName.contains(searchTerm);
+        if (nameFound == true) {
+          filteredContacts = _contacts;
+          notifyListeners();
+        }
+        return true;
+      });
+    }
+  }
+
+  searchContacts(String query) {
+    if (query.isEmpty) {
+      filteredContacts = [];
+    } else {
+      filteredContacts = contacts.where(
+        (contact) {
+          return contact.displayName
+              .toLowerCase()
+              .contains(query.toLowerCase());
+        },
+      ).toList();
+    }
     notifyListeners();
   }
 }

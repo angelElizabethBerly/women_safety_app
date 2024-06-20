@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:provider/provider.dart';
 import 'package:women_safety_app/controller/add_contact_screen_controller.dart';
 import 'package:women_safety_app/global_widgets/primary_button.dart';
@@ -46,19 +47,39 @@ class _AddContactScreenState extends State<AddContactScreen> {
                 itemCount: addContactScreenState.count,
                 itemBuilder: (context, index) {
                   return Card(
-                      child: ListTile(
-                    title: Text(addContactScreenState.contactList[index].name),
-                    trailing: IconButton(
-                        onPressed: () {
-                          context
-                              .read<AddContactScreenController>()
-                              .deleteTruContact(
-                                  addContactScreenState.contactList[index],
-                                  context);
-                        },
-                        icon:
-                            Icon(Icons.delete, color: ColorConstants.darkPink)),
-                  ));
+                      elevation: 5,
+                      shadowColor: ColorConstants.darkPink,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListTile(
+                          title: Text(
+                              addContactScreenState.contactList[index].name),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                  onPressed: () async {
+                                    await FlutterPhoneDirectCaller.callNumber(
+                                        addContactScreenState
+                                            .contactList[index].number);
+                                  },
+                                  icon: Icon(Icons.call,
+                                      color: ColorConstants.darkPink)),
+                              IconButton(
+                                  onPressed: () {
+                                    context
+                                        .read<AddContactScreenController>()
+                                        .deleteTruContact(
+                                            addContactScreenState
+                                                .contactList[index],
+                                            context);
+                                  },
+                                  icon: Icon(Icons.delete,
+                                      color: ColorConstants.darkPink)),
+                            ],
+                          ),
+                        ),
+                      ));
                 },
               ),
             )

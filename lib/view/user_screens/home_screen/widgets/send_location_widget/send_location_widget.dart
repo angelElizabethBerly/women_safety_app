@@ -5,6 +5,7 @@ import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:women_safety_app/controller/home_screen_controller.dart';
 import 'package:women_safety_app/global_widgets/primary_button.dart';
 import 'package:women_safety_app/model/contact_model.dart';
@@ -91,33 +92,8 @@ class _SendLocationWidgetState extends State<SendLocationWidget> {
                   PrimaryButtonWidget(
                       title: "Send Alert",
                       onPressed: () async {
-                        List<TruContact> contactList =
-                            await DatabaseHelper().getContactList();
-                        String recipients = "";
-                        int i = 1;
-                        for (TruContact contact in contactList) {
-                          recipients += contact.number;
-                          if (i != contactList.length) {
-                            recipients += ";";
-                            i++;
-                          }
-                        }
-                        String messageBody =
-                            "https://www.google.com/maps/search/?api=1&query=${currentPosition!.latitude}%2C${currentPosition!.longitude}. $currentAddress";
-                        if (await context
-                            .read<HomeScreenController>()
-                            .isPermissionGranted()) {
-                          contactList.forEach(
-                            (element) {
-                              context.read<HomeScreenController>().sendSms(
-                                  "${element.number}",
-                                  "I am in trouble, please reach out to me at $messageBody",
-                                  simSlot: 1);
-                            },
-                          );
-                        } else {
-                          Fluttertoast.showToast(msg: "Something went wrong");
-                        }
+                        Share.share(
+                            'https://www.google.com/maps/search/?api=1&query=${currentPosition!.latitude}%2C${currentPosition!.longitude}. $currentAddress');
                       }),
                 ],
               ),

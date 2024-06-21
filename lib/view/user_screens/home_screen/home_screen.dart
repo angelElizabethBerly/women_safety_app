@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:women_safety_app/controller/home_screen_controller.dart';
+import 'package:women_safety_app/view/user_screens/add_contact_screen/add_contact_screen.dart';
 import 'package:women_safety_app/view/user_screens/home_screen/widgets/custom_carousel.dart';
 import 'package:women_safety_app/utils/color_constants.dart';
 import 'package:women_safety_app/utils/women_database.dart';
@@ -41,20 +42,16 @@ class _HomeScreenState extends State<HomeScreen> {
           "SafeWomen",
           style: TextStyle(color: ColorConstants.primaryWhite),
         ),
-      ),
-      drawer: Drawer(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            UserAccountsDrawerHeader(
-                currentAccountPicture: CircleAvatar(),
-                accountName: Text("Acc Name"),
-                accountEmail: Text("Acc Email")),
-            ListTile(leading: Icon(Icons.person), title: Text("Profile")),
-            ListTile(leading: Icon(Icons.settings), title: Text("Settings")),
-            ListTile(leading: Icon(Icons.book), title: Text("About")),
-          ],
-        ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AddContactScreen()));
+              },
+              icon: Icon(Icons.contacts, color: ColorConstants.primaryWhite))
+        ],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -88,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisSpacing: 20,
                       crossAxisCount: 2),
                   children: [
-                    SosEmergencyWidget(),
+                    // SosEmergencyWidget(),
                     PoliceEmergencyWidget(),
                     AmbulanceEmergencyWidget(),
                     EmergencyContactWidget()

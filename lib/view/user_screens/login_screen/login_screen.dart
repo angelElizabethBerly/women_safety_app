@@ -90,10 +90,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         await onSubmit();
                       }
                     }),
-            Align(
-                alignment: Alignment.centerRight,
-                child: SecondaryButtonWidget(
-                    title: "Forgot Password?", onPressed: () {}))
+            // Align(
+            //     alignment: Alignment.centerRight,
+            //     child: SecondaryButtonWidget(
+            //         title: "Forgot Password?", onPressed: () {}))
           ]),
         ),
       ),

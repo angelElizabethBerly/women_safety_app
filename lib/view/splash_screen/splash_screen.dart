@@ -24,7 +24,8 @@ class _SplashScreenState extends State<SplashScreen> {
             context,
             MaterialPageRoute(
                 builder: (context) => MySharedPreference.getUserType() == 'user'
-                    ? BottomNavWidget()
+                    ? HomeScreen()
+                    // BottomNavWidget()
                     : MySharedPreference.getUserType() == 'guardian'
                         ? GuardianHomeScreen()
                         : LoginScreen())));

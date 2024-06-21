@@ -165,17 +165,17 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                           onSubmit();
                         }
                       }),
-              Align(
-                  alignment: Alignment.centerRight,
-                  child: SecondaryButtonWidget(
-                      title: "Register as Guardian",
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    GuardianRegisterScreen()));
-                      }))
+              // Align(
+              //     alignment: Alignment.centerRight,
+              //     child: SecondaryButtonWidget(
+              //         title: "Register as Guardian",
+              //         onPressed: () {
+              //           Navigator.pushReplacement(
+              //               context,
+              //               MaterialPageRoute(
+              //                   builder: (context) =>
+              //                       GuardianRegisterScreen()));
+              //         }))
             ]),
           ),
         ),
